@@ -1,0 +1,2 @@
+#! /bin/bash
+cat "$(find "${0%/*}"/snippets | fzf)" | pbcopy
