@@ -10,9 +10,9 @@ struct Modular {
     template<class T> constexpr Modular(T _val) { _val %= M::m(); if (_val < 0) _val += M::m(); val = static_cast<I>(_val); }
 
     template<class T> constexpr explicit operator T() const { return static_cast<T>(val); }
-#define DEFINE_CMP(op) constexpr bool operator op(Modular o) const { return val op o.val; }
-    DEFINE_CMP(==) DEFINE_CMP(!=) DEFINE_CMP(<) DEFINE_CMP(<=) DEFINE_CMP(>) DEFINE_CMP(>=)
-#undef DEFINE_CMP
+#define DEFINE_OP(op) constexpr auto operator op(Modular o) const { return val op o.val; }
+    DEFINE_OP(==) DEFINE_OP(!=) DEFINE_OP(<) DEFINE_OP(<=) DEFINE_OP(>) DEFINE_OP(>=) DEFINE_OP(%) DEFINE_OP(&) DEFINE_OP(^) DEFINE_OP(|) DEFINE_OP(<<) DEFINE_OP(>>)
+#undef DEFINE_OP
 
     constexpr Modular& operator+=(Modular o) { if ((val += o.val) >= M::m()) val -= M::m(); return *this; }
     constexpr Modular& operator-=(Modular o) { if (val < o.val) val += M::m(); val -= o.val; return *this; }
@@ -41,8 +41,8 @@ struct Modular {
 #define DEFINE_OPS(op) \
     template <class M, class T, class = enable_if_t<is_integral<T>::value>> constexpr auto operator op(Modular<M> l, T r) { return Modular<M>(l) op Modular<M>(r); } \
     template <class M, class T, class = enable_if_t<is_integral<T>::value>> constexpr auto operator op(T l, Modular<M> r) { return Modular<M>(l) op Modular<M>(r); }
-DEFINE_OPS(==) DEFINE_OPS(!=) DEFINE_OPS(<) DEFINE_OPS(<=) DEFINE_OPS(>) DEFINE_OPS(>=)
-DEFINE_OPS(+) DEFINE_OPS(-) DEFINE_OPS(*) DEFINE_OPS(/)
+DEFINE_OPS(==) DEFINE_OPS(!=) DEFINE_OPS(<) DEFINE_OPS(<=) DEFINE_OPS(>) DEFINE_OPS(>=) DEFINE_OPS(+) DEFINE_OPS(-)
+DEFINE_OPS(*) DEFINE_OPS(/) DEFINE_OPS(%) DEFINE_OPS(&) DEFINE_OPS(^) DEFINE_OPS(|) DEFINE_OPS(<<) DEFINE_OPS(>>)
 #undef DEFINE_OPS
 template<class M> std::ostream& operator<<(std::ostream& out, Modular<M> m) { return out << m.val; }
 template<class M> std::istream& operator>>(std::istream& in, Modular<M>& m) { ll val; in >> val; m = Modular<M>(val); return in; }
