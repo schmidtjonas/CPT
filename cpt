@@ -11,8 +11,8 @@ mkdir -p $d/../contests
 cont=$d/../contests/$1
 mkdir -p $cont
 
-mysides remove contest
-mysides add contest file://$cont
+mysides remove contest > /dev/null
+mysides add contest file://$cont > /dev/null
 cnt=$2
 for i in {a..z} ; do
     cp $d/template.cpp $cont/$i.cpp

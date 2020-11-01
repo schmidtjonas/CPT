@@ -25,7 +25,7 @@ struct suffarr {
                 else c[k][p[i].idx] = i;
             }
         }
-        for (int i = 0; i < n - 1; i++) sa[c[c.size() - 1][i] - 1] = i;
+        for (int i = 0; i < n - 1; i++) sa[c.back()[i] - 1] = i;
     }
 
     int lcp(int i, int j) {
@@ -36,4 +36,5 @@ struct suffarr {
         return ans;
     }
 };
+// O(n log^2(n)) time, O(n log(n)) space, can handle n <= 4*10^5
 //endregion
