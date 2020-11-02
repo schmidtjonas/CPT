@@ -1,4 +1,5 @@
-//region segtree
+// region segtree
+// source: cp-algorithms.com
 struct SegTree {
     using Node = int64_t;
     Node combine(Node l, Node r) {
@@ -54,4 +55,4 @@ struct SegTree {
 };
 // for lazy: add lazy val in Node, add push method to propagate lazy, call push before recursing, add to lazy in update
 // TODO change Node and methods
-//endregion
+// endregion
