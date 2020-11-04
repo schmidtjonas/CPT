@@ -11,7 +11,7 @@ mkdir -p $d/../contests
 cont=$d/../contests/$1
 mkdir -p $cont
 
-if [ $(uname) = 'Darwin' ]; then
+if [ -x "$(command -v mysides)" ]; then
     mysides remove contest > /dev/null
     mysides add contest file://$cont > /dev/null
 fi
