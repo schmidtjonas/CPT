@@ -1,4 +1,5 @@
 //region suffixarray
+//https://github.com/schmidtjonas/CPT
 struct suffix {
     pair<int, int> parts;
     int idx;
